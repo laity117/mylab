@@ -1,0 +1,206 @@
+/* styles.css */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.header {
+    background-color: #007bff;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center;     /* 垂直居中 */
+    padding: 40px 0;
+}
+
+form {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto; /* 确保表单在容器内水平居中 */
+}
+
+.profile-section,
+.info-section {
+    margin-bottom: 20px;
+}
+
+.profile-photo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-photo-container img {
+    margin-top: 10px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="tel"],
+.form-group input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="number"]:focus,
+.form-group input[type="tel"]:focus,
+.form-group input[type="email"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    main {
+        padding: 20px 0;
+    }
+
+    form {
+        padding: 20px;
+    }
+}
+
+/* 在 editProfile.css 文件中 */
+
+.profile-section {
+    margin-bottom: 20px;
+}
+
+.profile-photo-container {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* 设置图片和按钮之间的间距 */
+}
+
+.file-input-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.file-input-label:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.file-input-label i {
+    margin-right: 8px;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.avatar-upload {
+    display: flex;
+    align-items: center; /* 垂直居中对齐 */
+}
+
+.avatar-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* 标签和图片之间的间距 */
+}
+
+.avatar-label {
+    font-weight: bold;
+    margin: 0;
+}
+
+.avatar-preview-container {
+    position: relative;
+    width: 100px; /* 设置一个合适的宽度 */
+    height: 100px; /* 确保是正方形 */
+    border-radius: 50%; /* 圆形 */
+    overflow: hidden; /* 隐藏超出边界的图像部分 */
+    border: 2px solid #ddd;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.avatar-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 确保图像填充整个容器 */
+    display: block;
+}
+
+.avatar-input {
+    display: none; /* 隐藏文件输入框 */
+}

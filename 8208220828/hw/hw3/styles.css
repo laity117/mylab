@@ -1,0 +1,120 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+.navbar {
+    background-color: #333;
+    width: 250px; /* 根据需要调整宽度 */
+    flex-shrink: 0; /* 防止导航栏被压缩 */
+}
+
+.nav-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.section {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+    flex-basis: calc(25% - 20px);
+    box-sizing: border-box;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+}
+
+.nav-link:hover, .submenu-item a:hover {
+    background-color: #575757;
+}
+
+.submenu {
+    display: none;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.submenu-item {
+    padding: 10px 15px;
+}
+
+.submenu-item a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+
+
+.main {
+    flex-grow: 1;
+}
+
+.placeholder {
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    height: 300px; /* Adjust as needed */
+    margin-bottom: 20px;
+}
+
+.arrow {
+    position: absolute; /* 绝对定位箭头 */
+    right: 10px; /* 将箭头移动到父元素的右侧，距离边缘10px */
+    display: inline-block;
+    margin-left: 0; /* 移除之前可能添加的右侧间距 */
+    cursor: pointer; /* 鼠标悬停时显示为可点击的手形 */
+}
+
+.submenu {
+    display: none; /* 初始隐藏子菜单 */
+    list-style-type: none;
+    padding-left: 20px; /* 为子菜单添加一些缩进以区分层级 */
+}
+
+.right-content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.nav-item {
+    flex: 1 0 calc(25% - 20px); /* 初始时每个栏目占据25%的宽度，减去间隔 */
+    margin: 10px;
+    text-align: center;
+}
+.nav-item a {
+    display: block;
+    padding: 10px;
+}
+
+@media (max-width: 600px) {
+    .nav-item {
+        flex: 1 0 100%; /* 在小屏幕上，每个栏目占据全部宽度 */
+        margin: 10px 0; /* 上下间隔，左右间隔不再需要 */
+    }
+}

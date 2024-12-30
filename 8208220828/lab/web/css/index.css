@@ -1,0 +1,216 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #003366;
+    color: white;
+    padding: 20px;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+}
+
+.profile-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.profile-info h1 {
+    margin: 0;
+}
+
+.profile-info p {
+    margin: 5px 0;
+}
+
+.contact-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.contact-info p {
+    margin: 0;
+    padding: 5px;
+    border-left: 1px solid #ddd;
+}
+
+.contact-info p:first-child {
+    border-left: none;
+}
+
+section {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #ddd;
+}
+
+h2 {
+    border-bottom: 2px solid #003366;
+    padding-bottom: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+ul ul {
+    margin-left: 20px;
+}
+
+/* 访问次数显示框 */
+.right-bottom-fixed-footer {
+    position: fixed;
+    bottom: 20px; /* 距离底部的距离 */
+    right: 20px; /* 距离右侧的距离 */
+    background-color: rgba(255, 255, 255, 0.9); /* 半透明白色背景 */
+    color: #333; /* 深色文字 */
+    padding: 8px 16px; /* 减少内边距 */
+    border-radius: 20px; /* 圆角 */
+    box-shadow: -4px 4px 8px rgba(0, 0, 0, 0.2); /* 阴影效果 */
+    z-index: 1000; /* 确保它在其他内容之上 */
+    font-family: 'Arial', sans-serif; /* 字体 */
+    font-size: 14px; /* 减小字号 */
+    line-height: 1.2; /* 减小行高 */
+    transition: all 0.3s ease-in-out; /* 过渡效果 */
+}
+
+/* 访问次数数字样式 */
+#count {
+    color: #ff6f61; /* 红橙色 */
+    font-weight: bold; /* 加粗 */
+}
+
+/* 天气信息显示框 */
+.weather-info {
+    position: fixed;
+    bottom: 90px; /* 将其定位在访问次数显示框上方 */
+    right: 20px; /* 距离右侧的距离 */
+    background-color: rgba(255, 255, 255, 0.9); /* 半透明白色背景 */
+    color: #333; /* 深色文字 */
+    padding: 8px 16px; /* 减少内边距 */
+    border-radius: 20px; /* 圆角 */
+    box-shadow: -4px 4px 8px rgba(0, 0, 0, 0.2); /* 阴影效果 */
+    z-index: 1001; /* 确保它在访问次数显示框之上 */
+    font-family: 'Arial', sans-serif; /* 字体 */
+    font-size: 14px; /* 减小字号 */
+    line-height: 1.2; /* 减小行高 */
+}
+
+.profile-info {
+    flex-grow: 1;
+}
+
+/* 通用编辑按钮样式 */
+.edit-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.edit-button:hover {
+    background-color: #0056b3;
+}
+
+/* 个人信息部分的编辑按钮 */
+.header-content {
+    position: relative; /* 确保子元素能够相对于此容器定位 */
+}
+.header-content .edit-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+/* 教育背景部分的编辑按钮 */
+.education {
+    position: relative; /* 确保子元素能够相对于此容器定位 */
+}
+.education .edit-education-button {
+    position: absolute;
+    bottom: -40px; /* 根据实际情况调整 */
+    right: 20px;
+}
+
+.editable-section {
+    position: relative; /* 设置为相对定位 */
+}
+
+.top-right {
+    position: absolute;
+    top: 0; /* 定位到顶部 */
+    right: 0; /* 定位到右侧 */
+    margin: 10px; /* 添加一些外边距，使按钮不紧贴边缘 */
+    z-index: 10; /* 确保按钮显示在其他元素之上 */
+}
+
+/* 如果需要调整按钮本身的样式，可以在下面继续添加 */
+.edit-button {
+    text-decoration: none;
+    color: white;
+    background-color: #007bff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.edit-button:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+    .edit-button {
+        position: static;
+        margin-top: 20px;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* 成功消息框 */
+.alert-success {
+    color: green;
+    font-weight: bold;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #d6e9c6;
+    background-color: #dff0d8;
+    position: fixed; /* 固定定位 */
+    bottom: 20px; /* 距离底部20像素 */
+    left: 50%; /* 水平居中 */
+    transform: translateX(-50%); /* 精确水平居中 */
+    z-index: 1000; /* 确保覆盖其他内容 */
+    display: none; /* 默认隐藏 */
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+    border-radius: 5px; /* 圆角 */
+    max-width: 90%; /* 防止过宽 */
+    text-align: center; /* 文本居中 */
+}
+
+@media (max-width: 768px) {
+    .alert-success {
+        bottom: 10px; /* 在小屏幕上减少底部间距 */
+    }
+}

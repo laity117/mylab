@@ -1,0 +1,183 @@
+/* styles.css */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.header {
+    background-color: #007bff;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+}
+
+form {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px; /* 增加最大宽度 */
+    margin: 0 auto;
+}
+
+.education-entry {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%; /* 确保教育背景条目占据整个可用宽度 */
+    max-width: 780px; /* 根据需要调整最大宽度，通常比表单略小以保持内边距 */
+}
+
+.education-entry input {
+    flex: 1 0 calc(33.333% - 10px); /* 每个输入框占据一行的三分之一 */
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+/* 包裹按钮的容器 */
+.buttons-wrapper {
+    display: flex;
+    justify-content: space-between; /* 将按钮分别推到两端 */
+    margin-bottom: 10px; /* 根据需要调整间距 */
+    align-items: center; /* 垂直居中对齐 */
+}
+
+/* 按钮样式 */
+.submit-button {
+    font-size: 12px; /* 减小字体大小 */
+    padding: 6px 12px; /* 合适的内边距 */
+    border-radius: 4px; /* 圆角 */
+    box-sizing: border-box; /* 确保内边距和边框包含在元素的总宽高之内 */
+    background-color: #007bff; /* 蓝色背景 */
+    color: white; /* 白色文字 */
+    border: none; /* 移除默认边框 */
+    cursor: pointer; /* 更改鼠标指针为手型 */
+    transition: background-color 0.3s, transform 0.3s; /* 添加过渡效果 */
+    max-width: 120px; /* 设置最大宽度 */
+    height: auto; /* 自动高度 */
+    white-space: nowrap; /* 防止文本换行 */
+    overflow: hidden; /* 隐藏溢出的内容 */
+    text-overflow: ellipsis; /* 当文本溢出时显示省略号 */
+}
+
+.submit-button:hover {
+    background-color: #0056b3; /* 鼠标悬停时变深 */
+    transform: scale(1.05); /* 放大效果 */
+}
+
+.submit-button:focus {
+    outline: none; /* 移除点击后的轮廓线 */
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5); /* 点击后的焦点状态 */
+}
+
+.add-education {
+    background-color: #28a745; /* 绿色背景 */
+}
+
+.add-education:hover {
+    background-color: #218838; /* 鼠标悬停时变深 */
+}
+
+.save-changes {
+    background-color: #dc3545; /* 红色背景 */
+}
+
+.save-changes:hover {
+    background-color: #c82333; /* 鼠标悬停时变深 */
+}
+
+@media (max-width: 768px) {
+    main {
+        padding: 20px 0;
+    }
+
+    form {
+        padding: 20px;
+    }
+}
+
+/* 确保表单内部元素有足够的空间 */
+.main-content .container {
+    position: relative; /* 创建一个相对定位的上下文 */
+}
+
+/* 每个教育背景条目使用Flexbox布局 */
+.education-entry {
+    display: flex;
+    align-items: center; /* 垂直居中对齐 */
+    margin-bottom: 10px; /* 根据需要调整间距 */
+}
+
+/* 控制输入组宽度以适应同一行 */
+.input-group {
+    display: flex;
+    align-items: center;
+    margin-right: 8px; /* 输入组之间的间距 */
+}
+
+/* 控制输入框宽度 */
+.education-entry input {
+    padding: 6px;
+    margin-right: 8px; /* 输入框之间的间距 */
+    box-sizing: border-box; /* 确保内边距和边框包含在元素的总宽高之内 */
+}
+
+.education-entry input:last-child {
+    margin-right: 0; /* 最后一个输入框不需要右边距 */
+}
+
+/* 移除按钮样式 */
+.remove-button {
+    font-size: 12px;
+    padding: 6px 12px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #dc3545; /* 红色背景 */
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    margin-left: 8px; /* 让移除按钮与学位/专业输入框之间有适当间距 */
+}
+
+.remove-button:hover {
+    background-color: #c82333; /* 悬停时更深的红色 */
+    transform: scale(1.05);
+}
+
+.remove-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.5); /* 使用与背景颜色相匹配的阴影 */
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="UTF-8">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>编辑教育背景</title>
+  <link rel="stylesheet" href="../css/editEducation.css">
+</head>
+<body>
+<header class="header">
+  <div class="container">
+    <h1>编辑教育背景</h1>
+  </div>
+</header>
+
+<main class="main-content">
+  <div class="container">
+    <form id="educationForm" onsubmit="event.preventDefault(); saveEducationData();">
+      <!-- 添加一个div用于包裹按钮，以便于定位 -->
+      <div class="buttons-wrapper">
+        <button type="button" onclick="addEducationEntry()" class="submit-button add-education">新增</button>
+        <button type="submit" class="submit-button save-changes">保存</button>
+      </div>
+      <section id="educationEntries"></section>
+    </form>
+  </div>
+</main>
+
+<script>
+  // 初始化页面时加载已有教育背景数据
+  window.onload = function() {
+    loadEducationData();
+  };
+
+  function loadEducationData() {
+    fetch('http://localhost:8080/lab_Web_exploded/loadEducation')
+            .then(response => response.json())
+            .then(data => {
+              const entriesContainer = document.getElementById('educationEntries');
+              entriesContainer.innerHTML = ''; // 清空容器
+
+              data.forEach((entry, index) => {
+                addEducationEntry(entry, index);
+              });
+            })
+            .catch(error => console.error('Error loading education data:', error));
+  }
+
+  function addEducationEntry(entry = {}, index = null) {
+    const entryHtml = `
+                <div class="education-entry" data-index="${index}">
+                    <input type="text" name="dateRange" value="${entry.dateRange || ''}" placeholder="时间范围">
+                    <input type="text" name="schoolName" value="${entry.schoolName || ''}" placeholder="学校名称">
+                    <div class="input-group">
+                        <input type="text" name="degreeMajor" value="${entry.degreeMajor || ''}" placeholder="学位/专业">
+                        <button type="button" class="remove-button" onclick="removeEducationEntry(this)">移除</button>
+                    </div>
+                </div>
+            `;
+    const entriesContainer = document.getElementById('educationEntries');
+    entriesContainer.insertAdjacentHTML('beforeend', entryHtml);
+  }
+
+  function removeEducationEntry(button) {
+    button.closest('.education-entry').remove();
+  }
+
+  function saveEducationData() {
+    const entriesContainer = document.getElementById('educationEntries');
+    const entries = [];
+
+    // 遍历所有的教育背景条目并收集数据
+    [...entriesContainer.getElementsByClassName('education-entry')].forEach(entryDiv => {
+      const dateRange = entryDiv.querySelector('[name="dateRange"]').value;
+      const schoolName = entryDiv.querySelector('[name="schoolName"]').value;
+      const degreeMajor = entryDiv.querySelector('[name="degreeMajor"]').value;
+
+      if (dateRange || schoolName || degreeMajor) { // 如果有任意一项不为空，则加入列表
+        entries.push({ dateRange, schoolName, degreeMajor });
+      }
+    });
+
+    // 构建请求体
+    const requestBody = JSON.stringify({ educationEntries: entries });
+
+    // 使用 fetch API 发送 POST 请求
+    fetch('http://localhost:8080/lab_Web_exploded/saveEducation', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: requestBody
+    })
+            .then(response => response.json())
+            .then(data => {
+              window.location.href='http://localhost:63342/lab/web/html/index.html?successMessage=信息已成功更新'
+            })
+            .catch(error => {
+              console.error('Error saving education data:', error);
+              alert('保存教育背景信息时出错，请稍后再试。');
+            });
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="UTF-8">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>编辑个人信息</title>
+  <link rel="stylesheet" href="../css/editProfile.css">
+</head>
+<body>
+<header class="header">
+  <div class="container">
+    <h1>编辑个人信息</h1>
+  </div>
+</header>
+
+<main class="main-content">
+  <div class="container">
+    <form id="edit-form" action="http://localhost:8080/lab_Web_exploded/saveProfile" method="POST" enctype="multipart/form-data">
+      <section class="info-section">
+        <div class="form-group avatar-upload">
+          <div class="avatar-container">
+            <label for="imageFile" class="avatar-label">头像</label>
+            <div class="avatar-preview-container">
+              <img src="" alt="头像预览" id="preview" class="avatar-preview" style="display:none;">
+              <input type="file" id="imageFile" name="imageFile" accept="image/*" class="avatar-input">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="name">姓名:</label>
+          <input type="text" id="name" name="name" required placeholder="请输入您的姓名">
+        </div>
+        <div class="form-group">
+          <label for="age">年龄:</label>
+          <input type="number" id="age" name="age" required placeholder="请输入您的年龄">
+        </div>
+        <div class="form-group">
+          <label for="job">求职意向:</label>
+          <input type="tel" id="job" name="job" required placeholder="请输入您的求职意向">
+        </div>
+        <div class="form-group">
+          <label for="phone">电话:</label>
+          <input type="tel" id="phone" name="phone" required placeholder="请输入您的电话号码">
+        </div>
+        <div class="form-group">
+          <label for="email">邮箱:</label>
+          <input type="email" id="email" name="email" required placeholder="请输入您的电子邮件地址">
+        </div>
+        <div class="form-group">
+          <label for="address">地址:</label>
+          <input type="text" id="address" name="address" required placeholder="请输入您的联系地址">
+        </div>
+      </section>
+      <button type="submit" class="submit-button">保存修改</button>
+    </form>
+  </div>
+</main>
+
+<script>
+  // 点击预览图也可以选择文件
+  document.getElementById('preview').addEventListener('click', function() {
+    document.getElementById('imageFile').click();
+  });
+
+  document.getElementById('edit-form').addEventListener('submit', async function(event) {
+    //event.preventDefault(); // 阻止默认的表单提交行为
+
+    const form = event.target;
+    const formData = new FormData(form);
+
+    try {
+      // 先进行图片上传
+      await fetch('http://localhost:8080/lab_Web_exploded/uploadImage', {
+        method: 'POST',
+        body: formData
+      }).then(response => response.json())
+              .then(data => {
+                document.getElementById('message').innerText = data.message;
+              })
+              .catch(error => {
+                console.error('Error uploading image:', error);
+                document.getElementById('message').innerText = '图片上传失败，请重试。';
+                throw error; // 抛出错误以停止后续操作
+              });
+
+      // 然后保存用户信息
+      await fetch('http://localhost:8080/lab_Web_exploded/saveProfile', {
+        method: 'POST',
+        body: formData
+      }).then(response => response.json())
+              .then(data => {
+                document.getElementById('message').innerText = data.message;
+              })
+              .catch(error => {
+                console.error('Error saving profile:', error);
+                document.getElementById('message').innerText = '个人信息保存失败，请重试。';
+              });
+
+      // 提交成功后的提示或跳转等操作
+      alert('个人信息更新成功！');
+
+      window.location.href = 'index.html?successMessage=true';
+
+    } catch (error) {
+      // 捕获任何可能抛出的错误
+      console.error('Error during form submission:', error);
+    }
+  });
+
+  document.getElementById('imageFile').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    if (file) {
+      // 更新预览图
+      reader.onload = function(e) {
+        document.getElementById('preview').src = e.target.result;
+        document.getElementById('preview').style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    } else {
+      document.getElementById('preview').src = "";
+      document.getElementById('preview').style.display = 'none';
+    }
+  });
+
+
+  function loadProfileImage() {
+    const imageElement = document.getElementById('preview');
+    if (imageElement) {
+      const imageUrl = `http://localhost:8080/lab_Web_exploded/getImage`;
+      fetch(imageUrl)
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error('Network response was not ok');
+                }
+                return response.blob();
+              })
+              .then(blob => {
+                const objectUrl = URL.createObjectURL(blob);
+                imageElement.src = objectUrl;
+                imageElement.style.display = 'block';
+              })
+              .catch(error => {
+                console.error('There has been a problem with your fetch operation:', error);
+                alert('无法加载图片，请重试。');
+              });
+    } else {
+      console.error('Image element not found after setting innerHTML.');
+    }
+  }
+
+
+  document.addEventListener('DOMContentLoaded', function() {
+
+    fetch('http://localhost:8080/lab_Web_exploded/basicInformation')
+            .then(response => response.json())
+            .then(data => {
+              document.getElementById('name').value = data.name;
+              document.getElementById('age').value = data.age;
+              document.getElementById('job').value = data.job;
+              document.getElementById('phone').value = data.phone;
+              document.getElementById('email').value = data.email;
+              document.getElementById('address').value = data.address;
+              loadProfileImage();
+            })
+            .catch(error => console.error('Error:', error));
+  });
+</script>
+</body>
+</html>
